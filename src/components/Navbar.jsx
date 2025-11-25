@@ -6,7 +6,7 @@ import React from "react";
 function Navbar() {
   const pathname = usePathname();
 
-  const activeClass = "underline underline-offset-4 text-blue-600";
+  const activeClass = "underline underline-offset-4 text-[#a89141]";
   const items = (
     <>
       <li>
@@ -17,8 +17,8 @@ function Navbar() {
       </li>
       <li>
         {" "}
-        <Link href="/about" className={pathname === "/about" ? activeClass : ""}>
-          about
+        <Link href="/products" className={pathname === "/products" ? activeClass : ""}>
+          Products
         </Link>{" "}
       </li>
       <li>

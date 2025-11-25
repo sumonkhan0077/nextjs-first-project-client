@@ -1,11 +1,49 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Spinner from "@/components/Spinner";
+import AllCards from "@/components/AllCards";
 
 function page() {
+  const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+  console.log(products)
+
+  if (loading) {
     return (
-        <div>
-            this is home
-        </div>
+      <div className="text-center mt-10">
+        <Spinner /> {/* Use your Spinner component here */}
+        <p>Loading...</p> 
+      </div>
     );
-}
+  }
+  return (
+    <div className="max-w-[1080px] mx-auto grid grid-cols-2  md:grid-cols-3  lg:grid-cols-4 gap-6 mb-8 mt-5 ]">
+        
+           {
+            products.map((allProduct) => (
+              <AllCards
+                key={allProduct._id}
+               allProduct={allProduct}
+              ></AllCards>
+            ))
+          }
+        
+      </div>
+  );
+};
 
 export default page;
