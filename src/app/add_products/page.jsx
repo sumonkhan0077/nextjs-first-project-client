@@ -46,7 +46,7 @@ const AddWatchProduct = ({ handleProductAdded }) => {
     setRatingError(false);
     setQuantityError(false);
 
-    fetch("http://localhost:5000/products", {
+    fetch("https://firt-next-project-server.vercel.app/products", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newProduct),
@@ -77,6 +77,7 @@ const AddWatchProduct = ({ handleProductAdded }) => {
 
   return (
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
+      <title>Add Products</title>
       <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
         Add New Watch
       </h2>

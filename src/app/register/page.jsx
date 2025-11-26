@@ -1,81 +1,95 @@
 "use client";
+
 import Link from "next/link";
 import { useContext, useState } from "react";
+
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import { auth } from "@/lib/firebaseClient";
 
 function RegisterPage() {
   const { createUser, setUser, signInWithGoogle } = useContext(AuthContext);
-  const router = useRouter();
 
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  // --- Set ID Token in Cookie ---
-  const setTokenCookie = async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const token = await user.getIdToken();
-    document.cookie = `token=${token}; path=/; secure; samesite=lax`;
-  };
+  const router = useRouter();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // Validation (same as before)
-    if (name.length < 3) { setNameError("Name should be more than 3 characters."); return; } else { setNameError(""); }
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) { setEmailError("Enter a valid email."); return; } else { setEmailError(""); }
-    const lowercase = /[a-z]/;
-    if (password.length < 6) { setPasswordError("Password must be at least 6 characters."); return; } 
-    else if (!lowercase.test(password)) { setPasswordError("Password must contain a lowercase letter."); return; } 
-    else { setPasswordError(""); }
-
-    try {
-      const result = await createUser(email, password);
-      setUser({ ...result.user, displayName: name, photoURL: photo });
-
-      // **Set token cookie after registration**
-      await setTokenCookie();
-
-      toast.success("User registered successfully!");
-      router.push("/"); // redirect after registration
-    } catch (err) {
-      console.log(err);
-      if (err.code === "auth/email-already-in-use") {
-        toast.error("This email is already in use.");
-      } else {
-        toast.error(`Something went wrong! ${err.message}`);
-      }
+    // Name validation
+    if (name.length < 3) {
+      setNameError("Name should be more than 3 characters.");
+      return;
+    } else {
+      setNameError("");
     }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError("Enter a valid email.");
+      return;
+    } else {
+      setEmailError("");
+    }
+
+    // Password validation
+    const lowercase = /[a-z]/;
+
+
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters.");
+      return;
+    } else if (!lowercase.test(password)) {
+      setPasswordError("Password must contain a lowercase letter.");
+      return;
+    } else {
+      setPasswordError("");
+    }
+
+    // Firebase create user
+    createUser(email, password)
+     createUser(email, password)
+  .then((result) => {
+    setUser({ ...result.user, displayName: name, photoURL: photo });
+    console.log(result);
+    toast.success("User logged in successfully!");
+    router.push("/");
+  })
+  .catch((err) => {
+    console.log(err, "sob e vul");
+    if (err.code === "auth/email-already-in-use") {
+      toast.error("This email is already in use.");
+    } else {
+      toast.error(`Something went wrong! ${err.message}`);
+    }
+  });
+
   };
 
   const handleGoogle = async () => {
     try {
       const result = await signInWithGoogle();
+      console.log("Google login success:", result.user);
       setUser(result.user);
-
-      // **Set token cookie after Google login**
-      await setTokenCookie();
-
-      toast.success("Google login successful!");
       router.push("/");
     } catch (err) {
       console.log("Google login error:", err);
-      toast.error("Google login failed!");
     }
   };
 
   return (
     <div className="hero bg-base-200 min-h-screen mt-1">
+      <title>Register</title>
       <div className="hero-content flex-col">
         <h1 className="text-5xl font-bold">Register Now!</h1>
 
@@ -84,6 +98,7 @@ function RegisterPage() {
             <form onSubmit={handleRegister}>
               <label className="label">Your Name</label>
               <input name="name" type="text" className="input" />
+
               {nameError && <p className="text-red-500">{nameError}</p>}
 
               <label className="label">Photo URL</label>

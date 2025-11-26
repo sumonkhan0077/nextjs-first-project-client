@@ -17,7 +17,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/popular-products")
+    fetch("https://firt-next-project-server.vercel.app/popular-products")
       .then((res) => res.json())
       .then((data) => {
         setPopularProducts(data);
@@ -30,6 +30,7 @@ export default function Home() {
   }, []);
   return (
     <div className="w-full max-w-[1200px] mx-auto mt-15 mb-16">
+      <title>Home</title>
       <div className="max-w-[1120px] mx-auto">
       <Swiper
         modules={[Pagination, Autoplay]}

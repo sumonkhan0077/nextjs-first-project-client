@@ -12,7 +12,7 @@ const ManageProducts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://firt-next-project-server.vercel.app/products")
       .then((res) => res.json())
       .then((data) => {
         setallProducts(data);
@@ -37,7 +37,7 @@ const ManageProducts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/products/${_id}`, {
+        fetch(`https://firt-next-project-server.vercel.app/products/${_id}`, {
           method: "DELETE",
            headers: { "Content-Type": "application/json" }
         })

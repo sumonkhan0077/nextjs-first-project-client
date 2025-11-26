@@ -5,7 +5,7 @@ import React from "react";
 
 async function getProduct(id) {
   // তোমার backend API বা MongoDB call
-  const res = await fetch(`http://localhost:5000/products/${id}`, {
+  const res = await fetch(`https://firt-next-project-server.vercel.app/products/${id}`, {
     cache: "no-store", // fresh data fetch
   });
   const data = await res.json();
@@ -23,6 +23,7 @@ export default async function ProductDetail({ params }) {
   return (
     <div>
     <div className="max-w-[1150px] mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <title>{product.name}</title>
       {/* SINGLE IMAGE */}
       <div className="relative">
         <div className="w-full h-[420px] bg-gray-100 rounded-xl overflow-hidden relative">

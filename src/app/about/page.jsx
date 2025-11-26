@@ -3,7 +3,7 @@ import React from "react";
 function Page() {
   return (
     <div className="bg-gray-50 min-h-screen py-12">
-      {/* ABOUT SECTION */}
+      <title>About & Contact</title>
       <div className="max-w-5xl mx-auto px-6">
         <div className="bg-[#dbb83a26] shadow-xl rounded-2xl p-10 mb-16 border">
           <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
@@ -38,7 +38,7 @@ function Page() {
         </div>
       </div>
 
-      {/* CONTACT SECTION */}
+      
       <div className="max-w-5xl mx-auto px-6">
         <div className="bg-[#dbb83a26] shadow-xl rounded-2xl p-10 border">
           <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
@@ -49,7 +49,7 @@ function Page() {
             Have questions? Feel free to reach out — we're here to help!
           </p>
 
-          {/* CONTACT INFO */}
+          
           <div className="grid md:grid-cols-2 gap-6 bg-[#dbb83a80] p-6 rounded-xl mb-10">
             <p>
               <span className="font-semibold text-gray-900">📧 Email:</span>{" "}
