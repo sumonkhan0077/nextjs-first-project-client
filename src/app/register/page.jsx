@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/components/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 function RegisterPage() {
   const { createUser, setUser, signInWithGoogle } = useContext(AuthContext);
@@ -42,21 +43,14 @@ function RegisterPage() {
     }
 
     // Password validation
-    const uppercase = /[A-Z]/;
     const lowercase = /[a-z]/;
-    const special = /[!@#$%^&*]/;
+
 
     if (password.length < 6) {
       setPasswordError("Password must be at least 6 characters.");
       return;
-    } else if (!uppercase.test(password)) {
-      setPasswordError("Password must contain an uppercase letter.");
-      return;
     } else if (!lowercase.test(password)) {
       setPasswordError("Password must contain a lowercase letter.");
-      return;
-    } else if (!special.test(password)) {
-      setPasswordError("Password must contain a special character.");
       return;
     } else {
       setPasswordError("");
@@ -64,26 +58,34 @@ function RegisterPage() {
 
     // Firebase create user
     createUser(email, password)
-      .then((result) => {
-        setUser({ ...result.user, displayName: name, photoURL: photo });
+     createUser(email, password)
+  .then((result) => {
+    setUser({ ...result.user, displayName: name, photoURL: photo });
+    console.log(result);
+    toast.success("User logged in successfully!");
+    router.push("/");
+  })
+  .catch((err) => {
+    console.log(err, "sob e vul");
+    if (err.code === "auth/email-already-in-use") {
+      toast.error("This email is already in use.");
+    } else {
+      toast.error(`Something went wrong! ${err.message}`);
+    }
+  });
 
-        // Redirect user
-        router.push("/");
-      })
-      .catch((err) => console.log(err));
   };
 
-const handleGoogle = async () => {
-  try {
-    const result = await signInWithGoogle();
-    console.log("Google login success:", result.user);
-    setUser(result.user);
-    router.push("/");
-  } catch (err) {
-    console.log("Google login error:", err);
-  }
-};
-
+  const handleGoogle = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log("Google login success:", result.user);
+      setUser(result.user);
+      router.push("/");
+    } catch (err) {
+      console.log("Google login error:", err);
+    }
+  };
 
   return (
     <div className="hero bg-base-200 min-h-screen mt-1">
@@ -120,7 +122,7 @@ const handleGoogle = async () => {
                 onClick={handleGoogle}
                 className="btn btn-outline w-full"
               >
-                 <FcGoogle className="text-xl mr-2" />
+                <FcGoogle className="text-xl mr-2" />
                 Continue with Google
               </button>
 

@@ -44,10 +44,10 @@ function Navbar() {
       <li>
         {" "}
         <Link
-          href="/login"
-          className={pathname === "/login" ? activeClass : ""}
+          href="/manage_products"
+          className={pathname === "/manage_products" ? activeClass : ""}
         >
-          login
+          Manage Products
         </Link>{" "}
       </li>
       <li>
