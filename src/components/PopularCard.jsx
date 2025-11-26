@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
 
 const PopularCard = ({ popularProduct }) => {
+  const {user} = useContext(AuthContext)
   console.log(popularProduct);
   const { _id, name, price, brand, band_color, image, rating } = popularProduct;
   return (
@@ -39,7 +41,7 @@ const PopularCard = ({ popularProduct }) => {
 
           {/* Button always at bottom */}
           <Link 
-          href={`/products/${_id }`}
+           href={user ? `/products/${_id}` : `/login`}
             className="w-full text-center mt-4 text-white font-semibold py-2 rounded-lg self-end active:scale-98"
             style={{ background: "#a89141" }}
           >

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import EliteTimeLogo from "./LogoText";
 import { AuthContext } from "./AuthProvider";
@@ -11,63 +11,53 @@ import Image from "next/image";
 
 function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logOut } = useContext(AuthContext);
 
   const activeClass = "underline underline-offset-4 text-[#a89141]";
 
+  const handleProtectedClick = (path) => {
+    if (!user) {
+      router.push("/login");
+    } else {
+      router.push(path);
+    }
+  };[]
+
   const items = (
     <>
       <li>
-        {" "}
         <Link href="/" className={pathname === "/" ? activeClass : ""}>
           Home
-        </Link>{" "}
+        </Link>
       </li>
       <li>
-        {" "}
-        <Link
-          href="/products"
-          className={pathname === "/products" ? activeClass : ""}
-        >
+        <Link href="/products" className={pathname === "/products" ? activeClass : ""}>
           Products
-        </Link>{" "}
+        </Link>
       </li>
       <li>
-        {" "}
-        <Link
-          href="/add_products"
+        <button
+          onClick={() => handleProtectedClick("/add_products")}
           className={pathname === "/add_products" ? activeClass : ""}
         >
           Add Products
-        </Link>{" "}
+        </button>
       </li>
       <li>
-        {" "}
-        <Link
-          href="/manage_products"
+        <button
+          onClick={() => handleProtectedClick("/manage_products")}
           className={pathname === "/manage_products" ? activeClass : ""}
         >
           Manage Products
-        </Link>{" "}
+        </button>
       </li>
       <li>
-        {" "}
-        <Link
-          href="/about"
-          className={pathname === "/about" ? activeClass : ""}
-        >
+        <Link href="/about" className={pathname === "/about" ? activeClass : ""}>
           About & Contact
-        </Link>{" "}
+        </Link>
       </li>
-      <li>
-        {" "}
-        <Link
-          href="/register"
-          className={pathname === "/register" ? activeClass : ""}
-        >
-          Register
-        </Link>{" "}
-      </li>
+
     </>
   );
 

@@ -1,19 +1,27 @@
 "use client";
-
 import React, { useState, useContext } from "react";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { AuthContext } from "@/components/AuthProvider";
+import { auth } from "@/lib/firebaseClient"; // Firebase client
 
 export default function Login() {
   const [error, setError] = useState("");
-
   const router = useRouter();
   const { logInUser, signInWithGoogle, setUser } = useContext(AuthContext);
 
+  // --- Set ID Token in Cookie ---
+  const setTokenCookie = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+    const token = await user.getIdToken();
+
+    document.cookie = `token=${token}; path=/; secure; samesite=lax`;
+  };
+
+  // --- Email/Password login ---
   const handelLogInUser = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -21,24 +29,29 @@ export default function Login() {
 
     try {
       await logInUser(email, password);
-      toast.success("User logged in successfully!");
+      await setTokenCookie(); // <-- set token after login
 
-      router.push("/"); // Next.js route redirect
+      toast.success("User logged in successfully!");
+      router.push("/"); // redirect after login
     } catch (err) {
       setError(err.code);
       toast.error("Something went wrong!");
     }
   };
 
+  // --- Google SignIn ---
   const handelGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
       setUser(result.user);
 
+      await setTokenCookie(); // <-- set token after Google login
+
       toast.success("Google login successful!");
       router.push("/");
     } catch (err) {
       setError(err.code);
+      toast.error("Something went wrong!");
     }
   };
 

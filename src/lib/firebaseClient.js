@@ -1,4 +1,3 @@
-// firebase/config.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
@@ -11,8 +10,6 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase (MUST COME FIRST)
-export const app = initializeApp(firebaseConfig);
-
-// Initialize Auth AFTER app
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
