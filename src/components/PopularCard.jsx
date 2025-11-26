@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const PopularCard = ({ popularProduct }) => {
@@ -37,12 +38,13 @@ const PopularCard = ({ popularProduct }) => {
           </div>
 
           {/* Button always at bottom */}
-          <button
-            className="w-full mt-4 text-white font-semibold py-2 rounded-lg self-end active:scale-98"
+          <Link 
+          href={`/products/${_id }`}
+            className="w-full text-center mt-4 text-white font-semibold py-2 rounded-lg self-end active:scale-98"
             style={{ background: "#a89141" }}
           >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

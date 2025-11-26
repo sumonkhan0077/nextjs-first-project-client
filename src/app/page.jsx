@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/Spinner";
 import PopularCard from "@/components/PopularCard";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -89,7 +90,7 @@ export default function Home() {
         
       </div>
        <div className="text-center mb-6">
-        <button className="py-2  mx-auto px-3 rounded-lg bg-[#a89141] text-white transform hover:scale-102 transition duration-300 ease-in-out">View More Products</button>
+        <Link href="/products" className="py-2  mx-auto px-3 rounded-lg bg-[#a89141] text-white transform hover:scale-102 transition duration-300 ease-in-out">View More Products</Link>
       </div>
      </div>
 

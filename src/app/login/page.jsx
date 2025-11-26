@@ -43,7 +43,7 @@ export default function Login() {
   };
 
   return (
-    <div className="mt-24 min-h-screen flex items-center justify-center">
+    <div className="mt-2 min-h-screen flex items-center justify-center">
       <div className="card bg-base-100 w-full max-w-sm shadow-2xl p-6">
         <h1 className="text-center text-4xl font-bold mb-4">Login Now!</h1>
 
@@ -79,7 +79,7 @@ export default function Login() {
 
             <div className="flex items-center my-2">
               <span className="flex-1 h-0.5 bg-gray-300"></span>
-              <span className="px-2 text-sm">or</span>
+              <span className="px-2 text-sm">OR</span>
               <span className="flex-1 h-0.5 bg-gray-300"></span>
             </div>
 
@@ -89,7 +89,7 @@ export default function Login() {
               className="btn w-full btn-outline flex justify-center items-center"
             >
               <FcGoogle className="text-xl mr-2" />
-              Google
+              Continue with Google
             </button>
 
             <p className="text-center mt-3">

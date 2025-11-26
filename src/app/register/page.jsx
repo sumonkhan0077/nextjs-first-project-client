@@ -73,17 +73,20 @@ function RegisterPage() {
       .catch((err) => console.log(err));
   };
 
-  const handleGoogle = () => {
-    signInWithGoogle()
-      .then((result) => {
-        setUser(result.user);
-        router.push("/");
-      })
-      .catch((err) => console.log(err));
-  };
+const handleGoogle = async () => {
+  try {
+    const result = await signInWithGoogle();
+    console.log("Google login success:", result.user);
+    setUser(result.user);
+    router.push("/");
+  } catch (err) {
+    console.log("Google login error:", err);
+  }
+};
+
 
   return (
-    <div className="hero bg-base-200 min-h-screen mt-20">
+    <div className="hero bg-base-200 min-h-screen mt-1">
       <div className="hero-content flex-col">
         <h1 className="text-5xl font-bold">Register Now!</h1>
 

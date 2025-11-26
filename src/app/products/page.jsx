@@ -25,8 +25,8 @@ function page() {
   if (loading) {
     return (
       <div className="text-center mt-10">
-        <Spinner /> {/* Use your Spinner component here */}
-        <p>Loading...</p> 
+        <Spinner />
+        
       </div>
     );
   }
