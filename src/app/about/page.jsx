@@ -1,25 +1,44 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function Page() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <motion.div 
+      className="bg-slate-50 dark:bg-slate-900 min-h-screen py-12 text-center"
+      initial={mounted ? { opacity: 0 } : false}
+      animate={mounted ? { opacity: 1 } : false}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <title>About & Contact</title>
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="bg-[#dbb83a26] shadow-xl rounded-2xl p-10 mb-16 border">
-          <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
+
+      <motion.div 
+        className="max-w-5xl mx-auto px-6"
+        initial={mounted ? { opacity: 0, y: 20 } : false}
+        animate={mounted ? { opacity: 1, y: 0 } : false}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+      >
+        <div className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-10 mb-16 border border-slate-200 dark:border-slate-700">
+          <h1 className="text-4xl font-bold text-center mb-8 text-slate-800 dark:text-slate-100">
             About Us
           </h1>
 
-          <div className="space-y-6 text-lg leading-relaxed text-gray-700">
+          <div className="space-y-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
             <p>
               Welcome to{" "}
-              <span className="font-semibold">Your Store Name</span> — your
+              <span className="font-semibold">EliteTime</span> — your
               trusted destination for premium luxury watches. We combine
               elegance, durability, and modern design to ensure you get the finest
               timepieces.
             </p>
 
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold text-slate-900 dark:text-slate-100">
               Our mission is to provide:
             </p>
 
@@ -36,35 +55,38 @@ function Page() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="bg-[#dbb83a26] shadow-xl rounded-2xl p-10 border">
-          <h1 className="text-4xl font-bold text-center mb-8 text-gray-900">
+      <motion.div 
+        className="max-w-5xl mx-auto px-6"
+        initial={mounted ? { opacity: 0, y: 20 } : false}
+        animate={mounted ? { opacity: 1, y: 0 } : false}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+      >
+        <div className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-10 border border-slate-200 dark:border-slate-700">
+          <h1 className="text-4xl font-bold text-center mb-8 text-slate-800 dark:text-slate-100">
             Contact Us
           </h1>
 
-          <p className="text-gray-700 text-lg mb-8 text-center max-w-2xl mx-auto">
+          <p className="text-slate-700 dark:text-slate-300 text-lg mb-8 text-center max-w-2xl mx-auto">
             Have questions? Feel free to reach out — we're here to help!
           </p>
 
-          
-          <div className="grid md:grid-cols-2 gap-6 bg-[#dbb83a80] p-6 rounded-xl mb-10">
-            <p>
-              <span className="font-semibold text-gray-900">📧 Email:</span>{" "}
-              support@yourstore.com
+          <div className="grid md:grid-cols-2 gap-6 bg-slate-100 dark:bg-slate-700 p-6 rounded-xl mb-10 border border-slate-200 dark:border-slate-600">
+            <p className="text-slate-700 dark:text-slate-300">
+              <span className="font-semibold text-slate-900 dark:text-slate-100">📧 Email:</span>{" "}
+              support@elitetime.com
             </p>
-            <p>
-              <span className="font-semibold text-gray-900">📞 Phone:</span> +880
+            <p className="text-slate-700 dark:text-slate-300">
+              <span className="font-semibold text-slate-900 dark:text-slate-100">📞 Phone:</span> +880
               1234-567890
             </p>
-            <p>
-              <span className="font-semibold text-gray-900">📍 Address:</span>{" "}
+            <p className="text-slate-700 dark:text-slate-300">
+              <span className="font-semibold text-slate-900 dark:text-slate-100">📍 Address:</span>{" "}
               Dhaka, Bangladesh
             </p>
-            <p>
-              <span className="font-semibold text-gray-900">⏱ Support Hours:</span>{" "}
+            <p className="text-slate-700 dark:text-slate-300">
+              <span className="font-semibold text-slate-900 dark:text-slate-100">⏱ Support Hours:</span>{" "}
               10 AM – 10 PM
             </p>
           </div>
@@ -72,49 +94,48 @@ function Page() {
           {/* FORM */}
           <form className="space-y-6 max-w-2xl mx-auto">
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-slate-700 dark:text-slate-300 font-medium mb-1">
                 Your Name
               </label>
               <input
                 type="text"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black/30"
+                className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                 placeholder="Enter your name"
               />
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-slate-700 dark:text-slate-300 font-medium mb-1">
                 Your Email
               </label>
               <input
                 type="email"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black/30"
+                className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                 placeholder="Enter your email"
               />
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-slate-700 dark:text-slate-300 font-medium mb-1">
                 Message
               </label>
               <textarea
                 rows="4"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black/30"
+                className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-slate-500 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                 placeholder="Write your message..."
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#ac8d1cf1] text-white py-3 rounded-lg font-semibold active:scale-98 cursor-pointer  hover:bg-[#b99a2a] transition"
+              className="w-full bg-slate-600 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-800 text-white py-3 rounded-lg font-semibold hover:scale-105 cursor-pointer transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Send Message
             </button>
           </form>
         </div>
-      </div>
-      
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

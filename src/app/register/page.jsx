@@ -91,9 +91,9 @@ function RegisterPage() {
     <div className="hero bg-base-200 min-h-screen mt-1">
       <title>Register</title>
       <div className="hero-content flex-col">
-        <h1 className="text-5xl font-bold">Register Now!</h1>
+        <h1 className="text-5xl font-bold text-slate-800 dark:text-slate-100">Register Now!</h1>
 
-        <div className="card bg-base-100 w-96 shadow-xl">
+        <div className="card bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm w-96 shadow-modern-lg border border-slate-200 dark:border-slate-700 rounded-2xl">
           <div className="card-body">
             <form onSubmit={handleRegister}>
               <label className="label">Your Name</label>
@@ -112,7 +112,7 @@ function RegisterPage() {
               <input name="password" type="password" className="input" />
               {passwordError && <p className="text-red-500">{passwordError}</p>}
 
-              <button type="submit" className="btn btn-outline mt-4 w-full">
+              <button type="submit" className="btn mt-4 w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-800 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-200">
                 Register
               </button>
 
@@ -121,7 +121,7 @@ function RegisterPage() {
               <button
                 type="button"
                 onClick={handleGoogle}
-                className="btn btn-outline w-full"
+                className="btn btn-outline w-full border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200"
               >
                 <FcGoogle className="text-xl mr-2" />
                 Continue with Google
@@ -129,7 +129,7 @@ function RegisterPage() {
 
               <p className="text-center mt-3">
                 Already have an account?{" "}
-                <Link className="text-blue-600" href="/login">
+                <Link className="text-teal-600 dark:text-teal-400 font-semibold hover:text-teal-700 dark:hover:text-teal-300 transition-colors" href="/login">
                   Login
                 </Link>
               </p>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Spinner from "@/components/Spinner";
 import AllCards from "@/components/AllCards";
+import SmoothScroll from "@/components/ui/smooth";
 
 function page() {
   const [products, setProducts] = useState([]);
@@ -33,6 +34,7 @@ function page() {
   return (
     <div className="max-w-[1080px] mx-auto grid grid-cols-2  md:grid-cols-3  lg:grid-cols-4 gap-6 mb-8 mt-5 ]">
       <title>Products</title>
+      {/* <SmoothScroll></SmoothScroll> */}
         
            {
             products.map((allProduct) => (

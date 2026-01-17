@@ -66,12 +66,12 @@ const ManageProducts = () => {
       <title>My Products</title>
 
       <div className="flex justify-between mt-4">
-        <h1 className="text-2xl font-semibold mb-4">
+        <h1 className="text-3xl font-bold mb-4 text-slate-800 dark:text-slate-100">
           My Products ({allProducts.length})
         </h1>
       </div>
 
-      <div className="overflow-x-auto bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 max-w-[1200px] mx-auto shadow-md rounded-lg mt-5 mb-10">
+      <div className="overflow-x-auto bg-slate-50 dark:bg-slate-900 max-w-[1200px] mx-auto shadow-modern-lg rounded-lg mt-5 mb-10 border border-slate-200 dark:border-slate-700">
         {loading ? (
           <div className="flex justify-center py-10">
             <Spinner />
@@ -79,7 +79,7 @@ const ManageProducts = () => {
         ) : allProducts.length > 0 ? (
           <table className="table-auto w-full border border-gray-200 rounded-lg overflow-hidden shadow-lg">
             {/* Table Head */}
-            <thead className="bg-gradient-to-r from-[#edd4a3] to-[#a89141] text-white">
+            <thead className="bg-slate-700 dark:bg-slate-800 text-white">
               <tr>
                 <th className="text-center py-2">#</th>
                 <th className="py-2">Product Name</th>
@@ -95,7 +95,7 @@ const ManageProducts = () => {
               {allProducts.map((item, index) => (
                 <tr
                   key={item._id}
-                  className="hover:bg-[#fdf5e6] transition duration-200"
+                  className="hover:bg-slate-100 dark:hover:bg-slate-800 transition duration-200"
                 >
                   <td className="text-center text-black py-2">{index + 1}</td>
                   <td className="py-2">
@@ -119,20 +119,20 @@ const ManageProducts = () => {
                     {item.rating}
                   </td>
                   <td className="text-center text-black py-2">{item.stock}</td>
-                  <td className="text-center text-[#a89141] font-semibold py-2">
+                  <td className="text-center text-teal-600 dark:text-teal-400 font-semibold py-2">
                     ${item.price}
                   </td>
                   <td className="py-2">
                     <div className="flex items-center gap-2 justify-center">
                       <Link
                         href={`/products/${item._id}`}
-                        className="btn btn-outline btn-xs text-[#a89141] border-[#a89141] hover:bg-[#a89141] hover:text-white"
+                        className="btn btn-outline btn-xs text-teal-600 dark:text-teal-400 border-teal-600 dark:border-teal-400 hover:bg-teal-600 dark:hover:bg-teal-600 hover:text-white transition-all duration-200"
                       >
                         Details
                       </Link>
                       <button
                       onClick={() => handelRemoverProduct(item._id)}
-                      className="btn btn-outline btn-xs text-red-500 border-red-500 hover:bg-red-500 hover:text-white">
+                      className="btn btn-outline btn-xs text-slate-600 border-slate-600 hover:bg-slate-600 hover:text-white dark:text-slate-400 dark:border-slate-400 dark:hover:bg-slate-400 dark:hover:text-slate-900">
                         Remove
                       </button>
                     </div>

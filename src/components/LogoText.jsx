@@ -6,9 +6,9 @@ export default function EliteTimeLogo() {
    
 
       {/* Brand Name */}
-      <h1 className="text-3xl font-bold tracking-wide text-[#0A1A35]">
+      <h1 className="text-3xl font-bold tracking-wide text-[#424242]">
         Elite
-        <span className="text-[#D4AF37]">Time</span>
+        <span className="text-[#787878]">Time</span>
       </h1>
     </div>
   );

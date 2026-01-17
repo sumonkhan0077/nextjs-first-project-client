@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,16 +23,33 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (theme === 'dark' || (!theme && prefersDark)) {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-         <Navbar/>
-         {children}
-         <Footer/>
-          <ToastContainer />
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+           <Navbar/>
+           {children}
+           <Footer/>
+            <ToastContainer />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
