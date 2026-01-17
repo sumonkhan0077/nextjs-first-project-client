@@ -2,12 +2,8 @@
 ## Live Demo
 [https://my-first-next-app-one-sepia.vercel.app/]
 =======
-# 🕰️ EliteTime - Luxury Watch Store
->>>>>>> 8d221dc (added readme file)
 
 A modern, responsive luxury watch e-commerce website built with Next.js, featuring advanced animations, dark mode, and a sophisticated user experience.
-
-![EliteTime Banner](https://img.shields.io/badge/EliteTime-Luxury%20Watches-slate?style=for-the-badge&logo=watch&logoColor=white)
 
 ## 🌟 Features
 
